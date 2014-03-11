@@ -1,16 +1,25 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include<iostream>
+using namespace std;
+#include<stdio.h>
 
+bool look4Parts(char *img_file);
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv) {
+    char file_name[50];
+    for(int i=412 ; i<601;i++) {
+        sprintf(file_name, "test125%d.jpg",i);
+        if(look4Parts(file_name)) {
+            cout << i << " " << "has parts in it!\n";
+        }
+    }
+}
+
+bool look4Parts(char *img_file)
 {
-	IplImage* img = cvLoadImage( argv[1], 0);
-    cvNamedWindow( "example-input" );
-    cvNamedWindow( "example-output" );
-	
-    // Show the original image
-    cvShowImage("example-input", img);
-	
+	IplImage* img = cvLoadImage( img_file, 0);
+
     // Make sure image is divisible by 2
     assert( img->width%2 == 0 && img->height%2 == 0);
 	
@@ -21,17 +30,17 @@ int main(int argc, char *argv[])
     cvPyrDown( img, out );
 	
     // Perform canny edge detection
-    cvCanny( out, out, 15, 150, 3 );
+    cvCanny( out, out, 12, 120, 3 );
+
+    if( cvCountNonZero(out) > 0)
+    {
+//        cout << "found some part!";
+        return true;
+    }
+    else {
+  //      cout << "no parts here";
+    }
 	
-    // Show the processed image
-    cvShowImage("example-output", out);
-	
-    cvWaitKey(0);
-    cvReleaseImage( &img );
-    cvReleaseImage( &out );
-    cvDestroyWindow( "example-input" );
-    cvDestroyWindow( "example-output" );
-	
-    return 0;
+    return false;
 	
 }
