@@ -1,0 +1,12 @@
+We plan to programatically analyse the images provided by tomnod.com to find if airplane parts are visible in the
+images.
+
+1. We first plan to find edges in the images, if we find edges, then there is something in the picture that is not a
+cloud or water.
+
+2. For the second step, we initially just plan to review the images that have edges manually. If this data set turns out
+to be too big, we plan to programatically do something with that set, maybe use a classifier. But our knowledge is
+limited and we seek expert help to build such a classifier in a short time. If you can contribute to this, we and the
+friends and relatives of the passengers of MH-370 are grateful.
+
+Thank you!
